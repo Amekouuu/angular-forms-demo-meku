@@ -1,15 +1,22 @@
 <div class="card">
   <h1>{{ title }}</h1>
 
-  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" class="form">
-
+  <form
+    #myForm="ngForm"
+    (ngSubmit)="onSubmit(myForm)"
+    class="form"
+    novalidate
+  >
     <!-- Username -->
     <input
       class="input"
       type="text"
       name="username"
-      [(ngModel)]="username"
+      [(ngModel)]="model.username"
+      #username="ngModel"
       placeholder="Username"
+      required
+      minlength="3"
     />
 
     <!-- Email -->
@@ -17,8 +24,11 @@
       class="input"
       type="email"
       name="email"
-      [(ngModel)]="email"
+      [(ngModel)]="model.email"
+      #email="ngModel"
       placeholder="Email"
+      required
+      email
     />
 
     <!-- Password -->
@@ -26,8 +36,11 @@
       class="input"
       type="password"
       name="password"
-      [(ngModel)]="password"
+      [(ngModel)]="model.password"
+      #password="ngModel"
       placeholder="Password"
+      required
+      minlength="6"
     />
 
     <!-- Phone -->
@@ -35,8 +48,11 @@
       class="input"
       type="text"
       name="phone"
-      [(ngModel)]="phone"
+      [(ngModel)]="model.phone"
+      #phone="ngModel"
       placeholder="Phone Number"
+      required
+      pattern="^[0-9]{10,15}$"
     />
 
     <!-- Date of Birth -->
@@ -44,16 +60,20 @@
       class="input"
       type="date"
       name="dob"
-      [(ngModel)]="dob"
+      [(ngModel)]="model.dob"
+      #dob="ngModel"
+      required
     />
 
     <!-- Role -->
     <select
       class="input"
       name="role"
-      [(ngModel)]="role"
+      [(ngModel)]="model.role"
+      #role="ngModel"
+      required
     >
-      <option value="">Select role</option>
+      <option value="" disabled>Select role</option>
       <option value="Admin">Admin</option>
       <option value="User">User</option>
       <option value="Guest">Guest</option>
@@ -63,9 +83,11 @@
     <select
       class="input"
       name="department"
-      [(ngModel)]="department"
+      [(ngModel)]="model.department"
+      #department="ngModel"
+      required
     >
-      <option value="">Select department</option>
+      <option value="" disabled>Select department</option>
       <option value="IT">IT</option>
       <option value="HR">HR</option>
       <option value="Finance">Finance</option>
@@ -75,12 +97,25 @@
     <!-- Gender -->
     <div class="group">
       <label>
-        <input type="radio" name="gender" [(ngModel)]="gender" value="Male" />
+        <input
+          type="radio"
+          name="gender"
+          [(ngModel)]="model.gender"
+          #gender="ngModel"
+          value="Male"
+          required
+        />
         Male
       </label>
 
       <label>
-        <input type="radio" name="gender" [(ngModel)]="gender" value="Female" />
+        <input
+          type="radio"
+          name="gender"
+          [(ngModel)]="model.gender"
+          value="Female"
+          required
+        />
         Female
       </label>
     </div>
@@ -89,9 +124,11 @@
     <select
       class="input"
       name="status"
-      [(ngModel)]="status"
+      [(ngModel)]="model.status"
+      #status="ngModel"
+      required
     >
-      <option value="">Select status</option>
+      <option value="" disabled>Select status</option>
       <option value="Permanent">Permanent</option>
       <option value="Probationary">Probationary</option>
     </select>
@@ -100,20 +137,22 @@
     <textarea
       class="input"
       name="comments"
-      [(ngModel)]="comments"
+      [(ngModel)]="model.comments"
+      #comments="ngModel"
       rows="3"
       placeholder="Comments"
+      required
+      minlength="5"
     ></textarea>
 
-    <button class="btn" type="submit">
+    <button class="btn" type="submit" [disabled]="myForm.invalid">
       Submit
     </button>
 
     <!-- Output -->
     <div class="result" *ngIf="submitted">
       <h3>Captured Values</h3>
-      <pre>{{ myForm.value | json }}</pre>
+      <pre>{{ submittedData | json }}</pre>
     </div>
-
   </form>
 </div>

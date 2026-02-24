@@ -1,7 +1,7 @@
 <div class="card">
   <h1>{{ title }}</h1>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
 
     <!-- Username -->
     <input class="input" placeholder="Username" formControlName="username" />
@@ -39,6 +39,9 @@
       <option value="User">User</option>
       <option value="Guest">Guest</option>
     </select>
+    <small class="error" *ngIf="isInvalid('role')">
+      Role is required
+    </small>
 
     <!-- Department -->
     <select class="input" formControlName="department">
@@ -86,7 +89,7 @@
 
     <div class="result" *ngIf="submitted">
       <h3>Captured Values</h3>
-      <pre>{{ form.value | json }}</pre>
+      <pre>{{ submittedData | json }}</pre>
     </div>
 
   </form>
