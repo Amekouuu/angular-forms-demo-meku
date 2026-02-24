@@ -1,0 +1,119 @@
+<div class="card">
+  <h1>{{ title }}</h1>
+
+  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" class="form">
+
+    <!-- Username -->
+    <input
+      class="input"
+      type="text"
+      name="username"
+      [(ngModel)]="username"
+      placeholder="Username"
+    />
+
+    <!-- Email -->
+    <input
+      class="input"
+      type="email"
+      name="email"
+      [(ngModel)]="email"
+      placeholder="Email"
+    />
+
+    <!-- Password -->
+    <input
+      class="input"
+      type="password"
+      name="password"
+      [(ngModel)]="password"
+      placeholder="Password"
+    />
+
+    <!-- Phone -->
+    <input
+      class="input"
+      type="text"
+      name="phone"
+      [(ngModel)]="phone"
+      placeholder="Phone Number"
+    />
+
+    <!-- Date of Birth -->
+    <input
+      class="input"
+      type="date"
+      name="dob"
+      [(ngModel)]="dob"
+    />
+
+    <!-- Role -->
+    <select
+      class="input"
+      name="role"
+      [(ngModel)]="role"
+    >
+      <option value="">Select role</option>
+      <option value="Admin">Admin</option>
+      <option value="User">User</option>
+      <option value="Guest">Guest</option>
+    </select>
+
+    <!-- Department -->
+    <select
+      class="input"
+      name="department"
+      [(ngModel)]="department"
+    >
+      <option value="">Select department</option>
+      <option value="IT">IT</option>
+      <option value="HR">HR</option>
+      <option value="Finance">Finance</option>
+      <option value="Marketing">Marketing</option>
+    </select>
+
+    <!-- Gender -->
+    <div class="group">
+      <label>
+        <input type="radio" name="gender" [(ngModel)]="gender" value="Male" />
+        Male
+      </label>
+
+      <label>
+        <input type="radio" name="gender" [(ngModel)]="gender" value="Female" />
+        Female
+      </label>
+    </div>
+
+    <!-- Status -->
+    <select
+      class="input"
+      name="status"
+      [(ngModel)]="status"
+    >
+      <option value="">Select status</option>
+      <option value="Permanent">Permanent</option>
+      <option value="Probationary">Probationary</option>
+    </select>
+
+    <!-- Comments -->
+    <textarea
+      class="input"
+      name="comments"
+      [(ngModel)]="comments"
+      rows="3"
+      placeholder="Comments"
+    ></textarea>
+
+    <button class="btn" type="submit">
+      Submit
+    </button>
+
+    <!-- Output -->
+    <div class="result" *ngIf="submitted">
+      <h3>Captured Values</h3>
+      <pre>{{ myForm.value | json }}</pre>
+    </div>
+
+  </form>
+</div>
